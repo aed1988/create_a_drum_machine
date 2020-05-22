@@ -5,7 +5,7 @@ import './App.sass';
 function App() {
   return (
     <>
-      <Machine />
+      <Machine id="drum-machine" />
     </>
   );
 }
