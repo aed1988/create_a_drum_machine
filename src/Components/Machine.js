@@ -58,12 +58,17 @@ class Machine extends Component {
 
   handleClick = (e) => {
     const keyNote = parseInt(e.target.getAttribute('listid'));
-    // eslint-disable-next-line
     this.notes.forEach(elem => {
       if (elem.keyCode === keyNote) {
-        this.setState({active: elem}, () => console.log(`State:${JSON.stringify(this.state)}`))
+        this.setState({active: elem}, 
+          () => {
+            const audioUrl = new Audio(this.state.active.url)
+            audioUrl.play()
+          }
+          )
       }
     })
+    
   }
 
   render() {
