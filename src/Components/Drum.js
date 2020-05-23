@@ -4,7 +4,7 @@ const Drum = (props) => {
 
   return (
     <button className="button" onClick={props.onClick} listid={props.listid}>
-      Description: {props.note}.
+      {props.content}
     </button>
   )
 }

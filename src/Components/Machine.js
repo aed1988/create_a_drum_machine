@@ -8,17 +8,69 @@ class Machine extends Component {
     this.state = {active: ''}
   }
   
-  notes = [{id: 1, desc: 'This note 1'},{id: 2, desc: 'This note 2'},{id: 3, desc: 'This note 3'},{id: 4, desc: 'This note 4'},{id: 5, desc: 'This note 5'},{id: 6, desc: 'This note 6'},{id: 7, desc: 'This note 7'},{id: 8, desc: 'This note 8'}, {id: 9, desc: 'This note 9'}]
+  notes = [{
+    keyCode: 81,
+    keyTrigger: 'Q',
+    id: 'Heater-1',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'
+  }, {
+    keyCode: 87,
+    keyTrigger: 'W',
+    id: 'Heater-2',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'
+  }, {
+    keyCode: 69,
+    keyTrigger: 'E',
+    id: 'Heater-3',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'
+  }, {
+    keyCode: 65,
+    keyTrigger: 'A',
+    id: 'Heater-4',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'
+  }, {
+    keyCode: 83,
+    keyTrigger: 'S',
+    id: 'Clap',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'
+  }, {
+    keyCode: 68,
+    keyTrigger: 'D',
+    id: 'Open-HH',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'
+  }, {
+    keyCode: 90,
+    keyTrigger: 'Z',
+    id: "Kick-n'-Hat",
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'
+  }, {
+    keyCode: 88,
+    keyTrigger: 'X',
+    id: 'Kick',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'
+  }, {
+    keyCode: 67,
+    keyTrigger: 'C',
+    id: 'Closed-HH',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
+  },
+];
 
   handleClick = (e) => {
-    this.setState({active: this.notes[e.target.getAttribute('listid') - 1]})
+    const keyNote = parseInt(e.target.getAttribute('listid'));
+    // eslint-disable-next-line
+    this.notes.forEach(elem => {
+      if (elem.keyCode === keyNote) {
+        this.setState({active: elem}, () => console.log(`State:${JSON.stringify(this.state)}`))
+      }
+    })
   }
 
   render() {
     return (
       <>
         <DrumPad onClick={(e) => this.handleClick(e)} notesObj={this.notes}/>
-        <Display active={this.state.active}/>
+        <Display clickedDrumPad={this.state}/>
       </>
     )
   }

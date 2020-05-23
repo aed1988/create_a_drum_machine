@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Display = (props) => {
+const Display = ({clickedDrumPad}) => {
   return (
     <div id="display" className="display">
-      Selected button is: {props.active ? props.active.id : 'nothing so far'}
+      Selected button is: {clickedDrumPad ? clickedDrumPad.active.id : 'Nothing so far'}
     </div>
   )
 }

@@ -6,7 +6,7 @@ const Drumpad = (props) => {
 
   return (
     <div className='drumpad'>
-      {props.notesObj.map(element => <Drum key={element.id} listid={element.id} note={element.desc} onClick={props.onClick}/>)}
+      {props.notesObj.map(element => <Drum key={element.keyCode} listid={element.keyCode} content={element.id} onClick={props.onClick}/>)}
     </div>
   )
 }
