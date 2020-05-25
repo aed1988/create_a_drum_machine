@@ -56,26 +56,24 @@ class Machine extends Component {
   },
 ];
 
-  handlePlayClick = (e) => {
+  handlePlay = (e) => {
+    const keyCodes = this.notes.map(elem => elem.keyCode)
+    const index = keyCodes.indexOf(parseFloat(e))
     if(this.props.power) {
-    this.notes.forEach(elem => {
-      if (elem.id === e.target.value) {
-        this.setState({active: elem}, 
-          () => {
-            const audioUrl = new Audio(this.state.active.url)
-            audioUrl.play()
-          }
-          )
-      }
-    })
-  }
-    
-  }
+      this.setState(
+        {active: this.notes[index]}, 
+            () => {
+              const audioUrl = new Audio(this.state.active.url)
+              audioUrl.play()
+            }
+      )
+    }  
+}
 
   render() {
     return (
       <>
-        <Drum handlePlayClick={(e) => this.handlePlayClick(e)} notesObj={this.notes}/>
+        <Drum handlePlayClick={(e) => this.handlePlay(e)} notesObj={this.notes}/>
         <Display power={this.props.power} clickedDrumPad={this.state}/>
       </>
     )

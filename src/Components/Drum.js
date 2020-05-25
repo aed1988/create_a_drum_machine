@@ -11,13 +11,18 @@ const Drum = (props) => {
     return () => {
       document.removeEventListener('keypress', (e) => handleKeyDown(e))
     }
-  })
+  // eslint-disable-next-line
+  },[])
 
   const handleKeyDown = (e) => {
-    const keyTriggers = props.notesObj.map(element => element.keyTrigger)
-    const keyPressed = String.fromCharCode(e.charCode).toUpperCase()
 
-    keyTriggers.indexOf(keyPressed) !== -1 ? console.log('In the arr') : console.log('NOT in the arr')
+    const keyTriggers = props.notesObj.map(element => element.keyTrigger)
+    const keyPressed = e.key.toUpperCase()
+    console.log(keyPressed)
+
+    const keyCodes = props.notesObj.map(element => element.keyCode)
+
+    keyCodes.indexOf(e.keyCode) !== -1 ? props.handlePlayClick(e.keyCode) : console.log('NOT in the arr')
   }
 
   return (

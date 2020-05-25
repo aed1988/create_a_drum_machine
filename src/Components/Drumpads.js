@@ -1,13 +1,14 @@
 import React from 'react'
 
-const Drumpads = ({noteObj, handlePlayClick, handlePlayKey}) => {
+const Drumpads = ({ noteObj, handlePlayClick, handleKeyDown }) => {
 
   const handlePlay = (e) => {
-    handlePlayClick(e)
+    handlePlayClick(e.target.value)
   }
 
+
   return (
-    <button className="button" value={noteObj.id} listid={noteObj.listid} onClick={handlePlay} onKeyDown={handlePlayKey}>
+    <button className="button" value={noteObj.keyCode} listid={noteObj.listid} onClick={handlePlay} onKeyDownCapture={handleKeyDown}>
       {noteObj.keyTrigger}: {noteObj.id}
     </button>
   )
