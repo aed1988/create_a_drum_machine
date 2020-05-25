@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import DrumPad from './DrumPad'
+import Drum from './Drum'
 import Display from './Display'
 
 class Machine extends Component {
   constructor(props) {
     super(props)
-    this.state = {active: ''}
+    this.state = {active: null}
   }
   
   notes = [{
@@ -56,10 +56,10 @@ class Machine extends Component {
   },
 ];
 
-  handleClick = (e) => {
-    const keyNote = parseInt(e.target.getAttribute('listid'));
+  handlePlayClick = (e) => {
+    if(this.props.power) {
     this.notes.forEach(elem => {
-      if (elem.keyCode === keyNote) {
+      if (elem.id === e.target.value) {
         this.setState({active: elem}, 
           () => {
             const audioUrl = new Audio(this.state.active.url)
@@ -68,14 +68,15 @@ class Machine extends Component {
           )
       }
     })
+  }
     
   }
 
   render() {
     return (
       <>
-        <DrumPad onClick={(e) => this.handleClick(e)} notesObj={this.notes}/>
-        <Display clickedDrumPad={this.state}/>
+        <Drum handlePlayClick={(e) => this.handlePlayClick(e)} notesObj={this.notes}/>
+        <Display power={this.props.power} clickedDrumPad={this.state}/>
       </>
     )
   }
