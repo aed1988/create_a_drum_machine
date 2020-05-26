@@ -18,11 +18,10 @@ const Drum = (props) => {
 
     const keyTriggers = props.notesObj.map(element => element.keyTrigger)
     const keyPressed = e.key.toUpperCase()
-    console.log(keyPressed)
-
     const keyCodes = props.notesObj.map(element => element.keyCode)
+    const index = keyTriggers.indexOf(keyPressed)
 
-    keyCodes.indexOf(e.keyCode) !== -1 ? props.handlePlayClick(e.keyCode) : console.log('NOT in the arr')
+    index !== -1 && props.handlePlayClick(keyCodes[index]) 
   }
 
   return (

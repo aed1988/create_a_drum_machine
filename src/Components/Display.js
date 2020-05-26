@@ -1,6 +1,8 @@
 import React from 'react'
 
 const Display = ({ power, clickedDrumPad }) => {
+
+
   return (
     <div id="display" className="display">
       {(
@@ -8,7 +10,7 @@ const Display = ({ power, clickedDrumPad }) => {
         ? 'Power is off'
         : (!clickedDrumPad.active)
         ? 'Nothing clicked yet' 
-        : `Last pressed button is ${clickedDrumPad.active.id}`
+        : (clickedDrumPad.active.id)
       )}
     </div>
   )
