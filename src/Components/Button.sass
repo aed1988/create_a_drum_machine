@@ -30,16 +30,17 @@ $inner-text: #fafafa
   @include flexbox()
   flex-flow: row wrap
   justify-content: center
+  margin-top: 15px
   
 .button 
   @include button-background($color: $button-color)
-  @include button-radius($val: 40px)
+  @include button-radius($val: 20px)
   @include box-shadow($color: rgba(0,0,0,1) 0 1px 0)
   color: $inner-text
   border-top: 1px solid #f7f7f7
   width: 350px
-  height: 100px
-  margin: 10px
+  height: 140px
+  margin: 10px 15px
   text-shadow: rgba(0,0,0,.4) 0 1px 0
   font-size: 18px
   font-family: Georgia, serif

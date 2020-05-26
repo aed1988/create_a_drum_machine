@@ -1,4 +1,5 @@
 import React from 'react'
+import './ToggleButton.sass'
 
 const Switch = ({power, handleTogglePower}) => {
 
@@ -7,7 +8,7 @@ const Switch = ({power, handleTogglePower}) => {
   }
 
   return (
-    <button onClick={handleClick}>
+    <button className={(power ? 'toggleButton toggleButton--on' : 'toggleButton toggleButton--off')} onClick={handleClick}>
       Power is {power ? 'ON' : 'OFF'}
     </button>
   )
