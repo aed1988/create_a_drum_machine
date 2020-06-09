@@ -1,10 +1,96 @@
+$button-color: #723e07
+$inner-text: #fafafa
+
+  
 html,
 body 
   box-sizing: border-box
   height: 100%
   width: 100%
-  background: #F8F8FF
+  background: #e9e7e7
 
 *
   margin: 0
   padding: 0
+
+
+@mixin flexbox() 
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+
+@mixin button-background($color)
+  background: $color
+  background: -webkit-gradient(linear, left top, left bottom, from($button-color), to($color))
+  background: -webkit-linear-gradient(top, $button-color, $color)
+  background: -moz-linear-gradient(top, $button-color, $color)
+  background: -ms-linear-gradient(top, $button-color, $color)
+  background: -o-linear-gradient(top, $button-color, $color)
+
+@mixin button-radius($val)
+  -webkit-border-radius: $val
+  -moz-border-radius: $val
+  border-radius: $val
+
+@mixin box-shadow($color)
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0
+  box-shadow: rgba(0,0,0,1) 0 1px 0
+
+.drumpad
+  @include flexbox()
+  flex-flow: row wrap
+  justify-content: center
+  margin-top: 15px
+  
+.button 
+  @include button-background($color: $button-color)
+  @include button-radius($val: 7px)
+  @include box-shadow($color: rgba(0,0,0,1) 0 1px 0)
+  color: $inner-text
+  width: 350px
+  height: 140px
+  margin: 2px
+  text-shadow: rgba(0,0,0,.4) 0 1px 0
+  font-size: 18px
+  font-family: Georgia, serif
+  text-decoration: none
+  vertical-align: middle
+  outline: none
+   
+.button:hover 
+   border-top-color: #ba8c00
+   background: #ba1600
+   color: #ffffff
+
+.toggleButton
+  display: block
+  border: none
+  outline: none
+  width: 200px
+  margin: 10px auto
+  padding: 12px
+  border-radius: 4px
+
+.toggleButton--on
+  background: #52e052
+
+.toggleButton--off
+  background: #ce0505
+
+.display
+  display: block
+  width: 55%
+  margin: 40px auto 15px auto
+  text-align: center
+  background-color: #9494948c
+  border: 3px solid #000000
+  
+.display--text
+  padding: 10px
+  font-size: 3rem
+  color: #1d1b7d
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 4px

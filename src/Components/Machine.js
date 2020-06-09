@@ -1,84 +1,100 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import Drum from './Drum'
 import Display from './Display'
+import Switch from './Switch'
 
-class Machine extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {active: null}
-  }
-  
-  notes = [{
-    keyCode: 81,
+const Machine = ({power}) => {
+
+  useEffect(() => {
+    document.addEventListener("keypress", (e) => handlePlay(e))
+    return () => {
+      document.removeEventListener('keypress', (e) => handlePlay(e))
+    }
+  // eslint-disable-next-line
+  },[])
+
+  const [activeNote, setactiveNote] = useState(null)
+  const [isPowerOn, setIsPowerOn] = useState(true)
+
+  const notes = [{
+    keyboardCode: 'KeyQ',
     keyTrigger: 'Q',
     id: 'Chord-1',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
   }, {
-    keyCode: 87,
+    keyboardCode: 'KeyW',
     keyTrigger: 'W',
     id: 'Chord-2',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'
   }, {
-    keyCode: 69,
+    keyboardCode: 'KeyE',
     keyTrigger: 'E',
     id: 'Chord-3',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'
   }, {
-    keyCode: 65,
+    keyboardCode: 'KeyA',
     keyTrigger: 'A',
     id: 'Shaker',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'
   }, {
-    keyCode: 83,
+    keyboardCode: 'KeyS',
     keyTrigger: 'S',
     id: 'Open-HH',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'
   }, {
-    keyCode: 68,
+    keyboardCode: 'KeyD',
     keyTrigger: 'D',
     id: 'Closed-HH',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'
   }, {
-    keyCode: 90,
+    keyboardCode: 'KeyZ',
     keyTrigger: 'Z',
     id: 'Punchy-Kick',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'
   }, {
-    keyCode: 88,
+    keyboardCode: 'KeyX',
     keyTrigger: 'X',
     id: 'Side-Stick',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'
   }, {
-    keyCode: 67,
+    keyboardCode: 'KeyC',
     keyTrigger: 'C',
     id: 'Snare',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
   }]
+  
 
-handlePlay = (e) => {
-  const keyCodes = this.notes.map(elem => elem.keyCode)
-  const index = keyCodes.indexOf(parseFloat(e))
+  const handlePlay = (event) => {
+    if (!isPowerOn) return
 
+    const keyboardCodes = notes.map(elem => elem.keyboardCode)
 
-  if(this.props.power) {
-    this.setState(
-      {active: this.notes[index]}, 
-          () => {
-            const audioUrl = new Audio(this.state.active.url)
-            audioUrl.play()
-          }
-    )
+    let input
+    if (event.type === 'keypress' && keyboardCodes.includes(event.code)) input = event.code
+    if (event.type === 'click') input = event.target.value
+    if (input === undefined) return
+
+    let index = keyboardCodes.indexOf(input)
+    setactiveNote(notes[index])
+    handleAudio(notes[index])
+
   }
-}
-
-  render() {
-    return (
-      <>
-        <Drum handlePlayClick={(e) => this.handlePlay(e)} notesObj={this.notes}/>
-        <Display power={this.props.power} clickedDrumPad={this.state}/>
-      </>
-    )
+ 
+  const handleAudio = (note) => {
+    const audioUrl = new Audio(note.url)
+    audioUrl.play()
   }
+
+  const handleTogglePower = () => setIsPowerOn(!isPowerOn)
+
+
+  return (
+    <>
+      <Switch power={isPowerOn} handleTogglePower={handleTogglePower}/>
+      <Display power={isPowerOn} activeNote={activeNote}/>
+      <Drum notesObj={notes} handlePlay={handlePlay}/>
+    </>
+  )
 }
 
 export default Machine

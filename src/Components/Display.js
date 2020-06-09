@@ -1,19 +1,19 @@
 import React from 'react'
-import './Display.sass'
 
-const Display = ({ power, clickedDrumPad }) => {
+const Display = ({ power, activeNote }) => {
 
+  const displayText = (
+    (!power)
+      ? 'Power is off'
+      : !activeNote
+      ? 'Nothing clicked yet' 
+      : activeNote.id
+    )
 
   return (
     <div id="display" className="display">
       <div className="display--text">
-        {(
-        (!power)
-          ? 'Power is off'
-          : (!clickedDrumPad.active)
-          ? 'Nothing clicked yet' 
-          : (clickedDrumPad.active.id)
-        )}
+        {displayText}
       </div>
     </div>
   )
