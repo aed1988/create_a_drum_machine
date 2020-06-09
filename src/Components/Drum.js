@@ -22,7 +22,7 @@ const Drum = (props) => {
     const index = keyTriggers.indexOf(keyPressed)
 
     index !== -1 && props.handlePlayClick(keyCodes[index]) 
-  }
+  } 
 
   return (
     <div className='drumpad'>

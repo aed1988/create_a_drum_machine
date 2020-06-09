@@ -10,7 +10,7 @@ const Drumpads = ({ noteObj, handlePlayClick, handleKeyDown }) => {
   return (
     <button className="button drum-pad" value={noteObj.keyCode} listid={noteObj.listid} onClick={handlePlay} onKeyDown={handleKeyDown}>
       {noteObj.keyTrigger}: {noteObj.id}
-    </button>
+    </button> 
   )
 }
 
